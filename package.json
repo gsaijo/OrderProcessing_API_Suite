@@ -1,0 +1,33 @@
+{
+  "name": "orderprocessing_api_suite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:api": "nodemon api/server.js --watch api/server.js",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gsaijo/OrderProcessing_API_Suite.git"
+  },
+  "keywords": [],
+  "author": "Gustavo Saijo",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/gsaijo/OrderProcessing_API_Suite/issues"
+  },
+  "homepage": "https://github.com/gsaijo/OrderProcessing_API_Suite#readme",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^22.2.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.5",
+    "cypress": "^14.5.0",
+    "esbuild": "^0.25.5"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
