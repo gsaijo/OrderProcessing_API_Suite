@@ -9,7 +9,7 @@
   "postman:test": "newman run postman/Pedidos.postman_collection.json -e postman/Pedidos.postman_environment.json -r cli,htmlextra --reporter-htmlextra-export postman/reports/report.html",
   "cy:open": "npx cypress open",
   "cy:run": "npx cypress run",
-  "test:api": "concurrently \"npm run start:api\" \"sleep 5 && npm run postman:test\"",
+  "test:api": "npx concurrently \"npm run start:api\" \"sleep 5 && npm run postman:test\"",
   "test:cypress": "npm run cy:run"
 }
 ,
