@@ -40,18 +40,26 @@ jobs:
             libxss1 \
             xvfb
 
-      # Subindo API em background
       - name: Subir API em background
         run: npm run start:api &
 
-      # Esperar API subir antes de rodar testes Postman
       - name: Esperar API subir
         run: sleep 3
 
-      # Rodar testes Postman com Newman
       - name: Rodar testes Postman + Newman
         run: npm run postman:test
 
-      # Rodar testes Cypress
+      - name: Salvar relatório HTML do Newman
+        uses: actions/upload-artifact@v3
+        with:
+          name: newman-report
+          path: postman/reports/report.html
+
       - name: Rodar testes do Cypress
         run: npm run test:cypress
+
+      - name: Salvar relatório do Cypress (Mochawesome)
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-report
+          path: cypress/reports/html/report.html

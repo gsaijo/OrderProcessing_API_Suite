@@ -9,13 +9,20 @@ module.exports = defineConfig({
       await addCucumberPreprocessorPlugin(on, config);
 
       on("file:preprocessor", createBundler({
-          plugins: [createEsbuildPlugin(config)],
-        })
-      );
+        plugins: [createEsbuildPlugin(config)],
+      }));
 
       return config;
     },
     specPattern: "cypress/e2e/features/**/*.feature",
     baseUrl: "http://localhost:3000",
+  },
+
+  reporter: "mochawesome",
+  reporterOptions: {
+    reportDir: "cypress/reports",
+    overwrite: false,
+    html: false,
+    json: true
   }
 });
