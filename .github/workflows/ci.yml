@@ -50,7 +50,7 @@ jobs:
         run: npm run postman:test
 
       - name: Salvar relatório HTML do Newman
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: newman-report
           path: postman/reports/report.html
@@ -59,7 +59,7 @@ jobs:
         run: npm run test:cypress
 
       - name: Salvar relatório do Cypress (Mochawesome)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-report
           path: cypress/reports/html/report.html
