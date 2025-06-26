@@ -22,6 +22,9 @@ jobs:
       - name: Instalar dependências
         run: npm install
 
+      - name: Instalar Cypress globalmente
+        run: npm install -g cypress
+
       - name: Instalar reporter htmlextra do Newman
         run: npm install -g newman-reporter-htmlextra
 
@@ -34,9 +37,6 @@ jobs:
             libnss3 \
             libxss1 \
             xvfb
-
-      - name: Baixar binários do Cypress
-        run: npx cypress install
 
       # Subindo API em background
       - name: Subir API em background
