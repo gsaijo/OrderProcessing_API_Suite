@@ -73,11 +73,11 @@ Certifique-se de ter instalado:
 ### Cypress
 1. Inicie o servidor da API:
    ```bash
-   npm start:api
+   npm run start:api
    ```
 2. Execute os testes do Cypress:
    ```bash
-   npx cy:open
+   npx run cy:open
    ```
 
 ### Postman
