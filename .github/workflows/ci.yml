@@ -47,8 +47,11 @@ jobs:
           name: newman-report
           path: postman/reports/report.html
 
-      - name: Rodar testes Cypress
-        run: npm run cy:run
+      - name: Rodar testes Cypress com Action oficial
+        uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          record: false
 
       - name: Mesclar relatórios Mochawesome JSON
         run: npx mochawesome-merge cypress/reports/*.json > cypress/reports/output.json
