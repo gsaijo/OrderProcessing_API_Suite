@@ -32,8 +32,18 @@ jobs:
             libxss1 \
             xvfb
 
-      - name: Subir API e rodar testes Postman + Newman
-        run: npm run test:api
+      # Subindo API em background
+      - name: Subir API em background
+        run: npm run start:api &
 
+      # Esperar API subir antes de rodar testes Postman
+      - name: Esperar API subir
+        run: sleep 3
+
+      # Rodar testes Postman com Newman
+      - name: Rodar testes Postman + Newman
+        run: npm run postman:test
+
+      # Rodar testes Cypress
       - name: Rodar testes do Cypress
         run: npm run test:cypress
