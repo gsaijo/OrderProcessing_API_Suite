@@ -19,16 +19,8 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Instalar dependências
+      - name: Instalar dependências do projeto
         run: npm install
-
-      - name: Instalar Cypress globalmente
-        run: npm install -g cypress
-
-      - name: Instalar Newman e reporter htmlextra globalmente
-        run: |
-          npm install -g newman
-          npm install -g newman-reporter-htmlextra
 
       - name: Instalar dependências do sistema para Cypress
         run: |
@@ -55,11 +47,17 @@ jobs:
           name: newman-report
           path: postman/reports/report.html
 
-      - name: Rodar testes do Cypress
-        run: npm run test:cypress
+      - name: Rodar testes Cypress
+        run: npm run cy:run
+
+      - name: Mesclar relatórios Mochawesome JSON
+        run: npx mochawesome-merge cypress/reports/*.json > cypress/reports/output.json
+
+      - name: Gerar relatório Mochawesome HTML
+        run: npx marge cypress/reports/output.json -f report -o cypress/reports/html
 
       - name: Salvar relatório do Cypress (Mochawesome)
         uses: actions/upload-artifact@v4
         with:
           name: cypress-report
-          path: cypress/reports/report.html
+          path: cypress/reports/html/report.html
