@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:api": "nodemon api/server.js --watch api/server.js",
-    "postman:test": "newman run postman/Pedidos.postman_collection.json -e postman/Pedidos.postman_environment.json -r cli,htmlextra --reporter-htmlextra-export postman/reports/report.html && start postman/reports/report.html",
-    "cy:open": "cypress open",
-    "cy:run": "cypress run"
-  },
+  "start:apiauto": "nodemon api/server.js --watch api/server.js",
+  "start:api": "node api/server.js",
+  "postman:test": "newman run postman/Pedidos.postman_collection.json -e postman/Pedidos.postman_environment.json -r cli,htmlextra --reporter-htmlextra-export postman/reports/report.html",
+  "cy:open": "npx cypress open",
+  "cy:run": "npx cypress run",
+  "test:api": "concurrently \"npm run start:api\" \"sleep 5 && npm run postman:test\"",
+  "test:cypress": "npm run cy:run"
+}
+,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gsaijo/OrderProcessing_API_Suite.git"
@@ -24,6 +28,7 @@
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^22.2.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.5",
+    "concurrently": "^9.2.0",
     "cypress": "^14.5.0",
     "esbuild": "^0.25.5",
     "newman": "^6.2.1"
