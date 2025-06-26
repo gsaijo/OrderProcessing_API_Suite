@@ -22,6 +22,12 @@ jobs:
       - name: Instalar dependências
         run: npm install
 
+      - name: Instalar reporter htmlextra do Newman
+        run: npm install -g newman-reporter-htmlextra
+
+      - name: Baixar binários do Cypress
+        run: npx cypress install
+
       - name: Instalar dependências do sistema para Cypress
         run: |
           sudo apt-get update
