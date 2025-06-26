@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:api": "nodemon api/server.js --watch api/server.js",
+    "postman:test": "newman run postman/Pedidos.postman_collection.json -e postman/Pedidos.postman_environment.json -r cli,htmlextra --reporter-htmlextra-export postman/reports/report.html && start postman/reports/report.html",
     "cy:open": "cypress open",
     "cy:run": "cypress run"
   },
@@ -24,10 +25,12 @@
     "@badeball/cypress-cucumber-preprocessor": "^22.2.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.5",
     "cypress": "^14.5.0",
-    "esbuild": "^0.25.5"
+    "esbuild": "^0.25.5",
+    "newman": "^6.2.1"
   },
   "dependencies": {
     "express": "^5.1.0",
+    "newman-reporter-htmlextra": "^1.23.1",
     "nodemon": "^3.1.10"
   }
 }

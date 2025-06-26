@@ -16,7 +16,7 @@ app.post('/pedido', (req, res) => {
   res.status(201).json(pedido);
 });
 
-// Listar todos os pedidos
+// Consultar todos os pedidos
 app.get('/pedidos', (req, res) => {
   res.json(pedidos);
 });

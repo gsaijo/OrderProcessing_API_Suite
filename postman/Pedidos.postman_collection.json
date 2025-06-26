@@ -1,0 +1,288 @@
+{
+	"info": {
+		"_postman_id": "6bd0dd27-dbeb-40d1-bdf4-bded9ada1b68",
+		"name": "Pedidos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36448370",
+		"_collection_link": "https://only-me-saijo.postman.co/workspace/API-Pedidos~d7b8af33-cd88-480b-b66c-1631b27a3838/collection/36448370-6bd0dd27-dbeb-40d1-bdf4-bded9ada1b68?action=share&source=collection_link&creator=36448370"
+	},
+	"item": [
+		{
+			"name": "Criar pedido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code é 201\", () => {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Resposta tem os campos obrigatórios com os tipos corretos\", () => {\r",
+							"    const pedido = pm.response.json();\r",
+							"\r",
+							"    pm.expect(pedido).to.have.property('id').that.is.a('number');\r",
+							"    pm.expect(pedido.cpf).to.be.a('string').and.to.have.lengthOf(11);\r",
+							"    pm.expect(pedido).to.have.property('itens').that.is.an('array');\r",
+							"    pm.expect(pedido.itens.length).to.be.greaterThan(0);\r",
+							"    pm.expect(pedido).to.have.property('total').that.is.a('number').and.to.be.greaterThan(0);;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cpf\": \"99999999999\",\r\n  \"itens\": [\"item3\", \"item4\"],\r\n  \"total\": 650\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_URL}}/pedido",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"pedido"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar pedido por id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code é 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Pedido tem os campos obrigatórios com os tipos corretos\", () => {\r",
+							"    const pedido = pm.response.json();\r",
+							"\r",
+							"    pm.expect(pedido).to.have.property('id').that.is.a('number');\r",
+							"    pm.expect(pedido.cpf).to.be.a('string').and.to.have.lengthOf(11);\r",
+							"    pm.expect(pedido).to.have.property('itens').that.is.an('array');\r",
+							"    pm.expect(pedido.itens.length).to.be.greaterThan(0);\r",
+							"    pm.expect(pedido).to.have.property('total').that.is.a('number').and.to.be.greaterThan(0);;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_URL}}/pedido/1",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"pedido",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar todos os pedidos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code é 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Cada pedido tem campos obrigatórios com tipos corretos\", function () {\r",
+							"  const pedido = pm.response.json();\r",
+							"\r",
+							"  pedido.forEach(pedido => {\r",
+							"    pm.expect(pedido.cpf).to.be.a('string').and.to.have.lengthOf(11);\r",
+							"    pm.expect(pedido).to.have.property('itens').that.is.an('array');\r",
+							"    pm.expect(pedido.itens.length).to.be.greaterThan(0);\r",
+							"    pm.expect(pedido).to.have.property('total').that.is.a('number').and.to.be.greaterThan(0);;\r",
+							"  });\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_URL}}/pedidos",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"pedidos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar pedido por id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code é 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Atualizacao do pedido tem os campos obrigatórios com tipos corretos\", () => {\r",
+							"    const jsonData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(jsonData).to.have.property('mensagem').that.is.a('string');\r",
+							"    \r",
+							"    pm.expect(jsonData).to.have.property('pedido').that.is.an('object');\r",
+							"    const pedido = jsonData.pedido;\r",
+							"\r",
+							"    pm.expect(pedido).to.have.property('id').that.is.a('number');\r",
+							"    pm.expect(pedido.cpf).to.be.a('string').and.to.have.lengthOf(11);\r",
+							"    pm.expect(pedido).to.have.property('itens').that.is.an('array');\r",
+							"    pm.expect(pedido.itens.length).to.be.greaterThan(0);\r",
+							"    pm.expect(pedido).to.have.property('total').that.is.a('number').and.to.be.greaterThan(0);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cpf\": \"00987654321\",\r\n  \"itens\": [\"item3\", \"item4\"],\r\n  \"total\": 300\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_URL}}/pedido/1",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"pedido",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar pedido por id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code é 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Deletar pedido por id\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Pedido deletado com sucesso\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_URL}}/pedido/1",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"pedido",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar todos os pedidos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code é 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Deletar todos os pedidos\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Todos os pedidos foram removidos\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_URL}}/pedidos",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"pedidos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
